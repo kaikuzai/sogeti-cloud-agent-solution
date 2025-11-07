@@ -15,7 +15,7 @@ subscription_id = os.getenv("AZURE_SUBSCRIPTION_ID")
 
 @ai_function(
     name="list_resource_groups", 
-    description="This function will list all of the available resoure groups in the subscription, if requested only return the name of the resource groups unless stated differently", 
+    description="Use this function when the user requests the resource groups in their subscription. This function will list all of the available resoure groups in the subscription.", 
     approval_mode="never_require"
 )
 async def list_resource_groups(

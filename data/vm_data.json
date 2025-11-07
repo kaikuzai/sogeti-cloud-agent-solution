@@ -1,0 +1,15 @@
+{
+  "mcat-dev-weu-vm": {
+    "timestamp": "2025-11-07T08:32:14Z",
+    "resourceGroup": "mcat-dev-weu-rg",
+    "location": "westeurope",
+    "metrics": {
+      "iops": 600,
+      "cpuPercentage": 14,
+      "memoryUsedMB": 1024,
+      "networkInKB": 340,
+      "networkOutKB": 275
+    },
+    "status": "Running"
+  }
+}

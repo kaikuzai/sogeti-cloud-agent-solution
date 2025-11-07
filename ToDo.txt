@@ -1,0 +1,26 @@
+# Cloud Helper Agent - To-Do List
+
+## Current Capabilities ✅
+
+- [ ] User can request resource groups
+- [ ] User can request resources in resource groups  
+- [ ] User can request information about the virtual machine
+- [ ] User can use Microsoft Learn to assess what might cause performance issues in virtual machines
+- [ ] User can request IOPS information from VM data
+- [ ] User can ask agent for recommendations to improve virtual machine performance
+
+## Implementation Status
+
+### Completed Features:
+- Azure resource group listing
+- Azure resource enumeration within resource groups
+- Virtual machine profile and context retrieval
+- Microsoft Learn MCP integration for Azure documentation
+- VM IOPS data extraction and reporting
+- VM performance metrics analysis
+
+### Next Steps:
+- Test all capabilities end-to-end
+- Add VM performance recommendation engine
+- Enhance error handling and user feedback
+- Document usage examples
