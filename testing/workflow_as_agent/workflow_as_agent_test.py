@@ -7,16 +7,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from agent_framework.devui import serve
 from agent_framework.observability import setup_observability
-from workflows.fetch_resource_groups_wf import create_resource_group_flow
-
+from workflows.fetch_resource_groups_wf_as_agent import create_resource_group_flow
 
 def main():
 
 
     workflow = create_resource_group_flow()
+    agent = workflow.as_agent(name="resource_location_agent")
 
     
-    serve(entities=[workflow], port=8091, auto_open=True)
+    serve(entities=[agent], port=8091, auto_open=True)
 
 if __name__ == '__main__':
     main()

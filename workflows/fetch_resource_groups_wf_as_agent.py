@@ -10,6 +10,7 @@ from agent_framework import (
     WorkflowContext, 
     handler,
     WorkflowEvent,
+    ChatMessage
 )
 
 from azure.identity import DefaultAzureCredential
@@ -25,10 +26,12 @@ class ResourceGroupFetcher(Executor):
         super().__init__(id=id)
 
     @handler 
-    async def __call__(self, subscription_id: str, ctx: WorkflowContext[List[Dict[str,str]]]) -> None: 
+    async def __call__(self, input: list[ChatMessage], ctx: WorkflowContext[List[Dict[str,str]]]) -> None: 
         """ List all resource groups based on subscription ID"""
-        print(subscription_id)
+        print(input)
         credential = DefaultAzureCredential()
+
+        subscription_id = input[-1].text
 
         try:
             data = json.loads(subscription_id)
@@ -43,14 +46,14 @@ class ResourceGroupFetcher(Executor):
             resource_group_list = []
             resource_client = ResourceManagementClient(credential=credential, subscription_id=subscription_id)
 
-            print(resource_client)
-
             for resource_group in resource_client.resource_groups.list():
                 resource_group_list.append({
                     "id": resource_group.id, 
                     "name": resource_group.name, 
                     "location": resource_group.location
                 })
+
+            await ctx.send_message(ChatMessage(text=resource_group_list, role="assistant"))
 
             await ctx.add_event(CustomEvent(f"Found {len(resource_group_list)} resource groups"))
             await ctx.send_message(resource_group_list)
@@ -74,6 +77,7 @@ class LocationExtractor(Executor):
                     location_list.append(location)
 
             await ctx.add_event(CustomEvent(f"Extracted {len(location_list)} unique locations"))
+            print(location_list)
             await ctx.yield_output(location_list)
             await ctx.send_message(location_list)
 
